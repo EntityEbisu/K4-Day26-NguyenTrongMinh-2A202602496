@@ -6,4 +6,4 @@ venv/
 **/.venv
 .adk/
 *.db
-**/.DS_Store
+**/.DS_Store.hermes/
