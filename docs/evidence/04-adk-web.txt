@@ -1,0 +1,3 @@
+=== adk web (giao diện web của lab 04) ===
+GET http://localhost:8000/  -> HTTP 307
+GET /list-apps             -> ["weather_agent"]
