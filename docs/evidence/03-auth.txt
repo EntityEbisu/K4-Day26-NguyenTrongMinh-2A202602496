@@ -1,0 +1,17 @@
+Tools (có auth):
+  - get_weather: Lấy thời tiết hiện tại của một thành phố.
+
+Kết quả: Hanoi: 29°C, trời mưa
+
+=== Sai token (mong đợi 401/403) ===
+      |     raw = await self._dispatcher.send_raw_request(method, data.get("params"), opts)
+      |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      |   File "D:\VinUni\day26\K4-Day26-NguyenTrongMinh-2A202602496\.venv\Lib\site-packages\mcp\shared\jsonrpc_dispatcher.py", line 461, in send_raw_request
+      |     raise MCPError(code=outcome.code, message=outcome.message, data=outcome.data)
+      | mcp.shared.exceptions.MCPError: Server returned an error response
+      +------------------------------------
+
+=== HTTP status trực tiếp (bằng chứng auth ở tầng transport) ===
+không token : 401
+token sai   : 401
+token đúng  : 200
