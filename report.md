@@ -1,6 +1,6 @@
 # Báo cáo Day 26 — Phân biệt MCP và Function Calling
 
-- **Sinh viên:** Nguyễn Trọng Minh — MSSV 0246202 496 (K4)
+- **Sinh viên:** Nguyễn Trọng Minh — MSSV 2A202602496 (K4)
 - **Repo:** https://github.com/EntityEbisu/K4-Day26-NguyenTrongMinh-2A202602496
 - **Ngày chạy:** 2026-10-14 (giờ Việt Nam, UTC+07:00)
 - **Môi trường:** Windows 11, Git Bash (MSYS), Python 3.14.7, `uv 0.12.13`
