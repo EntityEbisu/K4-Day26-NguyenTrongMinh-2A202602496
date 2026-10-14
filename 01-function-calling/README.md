@@ -1,4 +1,10 @@
-# 01 — Function Calling thuần (Google Gemini SDK)
+# 01 — Function Calling thuần (LLM qua OpenCode Go)
+
+> **Cập nhật:** phần này nay chạy LLM qua **OpenCode Go** (model `step-5-preview-free`,
+> dự phòng `deepseek-v4.1-flash`) thay cho `google-genai`/Gemini, theo yêu cầu của bài lab.
+> Xem `.env.example` để biết biến môi trường. Ý tưởng function calling **không đổi**:
+> app tự khai schema, model chỉ quyết định gọi tool nào, app tự thực thi.
+> Code Gemini gốc vẫn nằm trong lịch sử git (commit trước đó).
 
 Tool `get_weather` được **định nghĩa schema thủ công** và **thực thi ngay trong app**.
 Model chỉ quyết định gọi tool nào — app mới là nơi chạy.
@@ -16,8 +22,8 @@ User hỏi  →  Model quyết định gọi get_weather(city="Hà Nội")
 ## Cách chạy
 
 ```bash
-pip install -r ../requirements.txt
-export GEMINI_API_KEY=...
+pip install -r ../requirements.txt   # gồm openai, python-dotenv
+# Không cần GEMINI_API_KEY — điền OPENCODE_API_KEY vào .env (xem ../.env.example)
 python weather_function_calling.py
 ```
 
