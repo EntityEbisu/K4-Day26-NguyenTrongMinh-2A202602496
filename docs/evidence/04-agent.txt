@@ -1,0 +1,37 @@
+D:\VinUni\day26\K4-Day26-NguyenTrongMinh-2A202602496\04-lab\mcp-client\.venv\Lib\site-packages\google\adk\features\_feature_decorator.py:72: UserWarning: [EXPERIMENTAL] feature FeatureName.PLUGGABLE_AUTH is enabled.
+  check_feature_enabled()
+INFO:weather_agent.agent:🌐 Initializing weather agent with remote MCP server
+INFO:weather_agent.agent:📡 MCP Server: http://localhost:8085/mcp
+INFO:weather_agent.agent:🤖 Model: openai/step-5-preview-free via https://opencode.ai/zen/go/v1
+INFO:weather_agent.agent:🔌 Connecting to MCP server...
+INFO:weather_agent.agent:✅ MCP toolset created successfully
+INFO:weather_agent.agent:✅ Weather agent initialized with remote MCP tools:
+INFO:weather_agent.agent:   - get_current_weather(city)
+INFO:weather_agent.agent:   - get_forecast(city, days)
+INFO:weather_agent.agent:   - health_check()
+INFO:weather_agent.agent:🎉 Remote MCP connection successful!
+WARNING:google_adk.google.adk.tools.mcp_tool.mcp_session_manager:Failed to configure mTLS using AsyncAuthorizedSession: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+D:\VinUni\day26\K4-Day26-NguyenTrongMinh-2A202602496\04-lab\mcp-client\.venv\Lib\site-packages\google\adk\tools\mcp_tool\mcp_toolset.py:304: UserWarning: [EXPERIMENTAL] feature FeatureName._MCP_GRACEFUL_ERROR_HANDLING is enabled.
+  session = await self._mcp_session_manager.create_session(
+INFO:httpx:HTTP Request: POST http://localhost:8085/mcp "HTTP/1.1 200 OK"
+INFO:mcp.client.streamable_http:Received session ID: 61d2499b301d45e2b66a7016d2fae219
+INFO:mcp.client.streamable_http:Negotiated protocol version: 2025-11-25
+INFO:httpx:HTTP Request: GET http://localhost:8085/mcp "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://localhost:8085/mcp "HTTP/1.1 202 Accepted"
+INFO:httpx:HTTP Request: POST http://localhost:8085/mcp "HTTP/1.1 200 OK"
+D:\VinUni\day26\K4-Day26-NguyenTrongMinh-2A202602496\04-lab\mcp-client\.venv\Lib\site-packages\google\adk\features\_feature_decorator.py:72: UserWarning: [EXPERIMENTAL] feature FeatureName.BASE_AUTHENTICATED_TOOL is enabled.
+  check_feature_enabled()
+D:\VinUni\day26\K4-Day26-NguyenTrongMinh-2A202602496\04-lab\mcp-client\.venv\Lib\site-packages\google\adk\models\llm_request.py:256: UserWarning: [EXPERIMENTAL] feature FeatureName.JSON_SCHEMA_FOR_FUNC_DECL is enabled.
+  declaration = tool._get_declaration()
+User: Thời tiết Hà Nội hôm nay thế nào?
+
+23:46:55 - LiteLLM:INFO: utils.py:4516 - 
+LiteLLM completion() model= step-5-preview-free; provider = openai
+INFO:LiteLLM:
+LiteLLM completion() model= step-5-preview-free; provider = openai
+  [agent gọi tool] get_current_weather({'city': 'Hanoi'})
+23:47:03 - LiteLLM:INFO: utils.py:4516 - 
+LiteLLM completion() model= step-5-preview-free; provider = openai
+INFO:LiteLLM:
+LiteLLM completion() model= step-5-preview-free; provider = openai
+Trả lời: Hà Nội hiện đang có mưa rào nhẹ, nhiệt độ khoảng 26,5°C (cảm giác như 28,3°C), độ ẩm khá cao 76% có gió nhẹ 16 km/h. Lưu ý tầm nhìn chỉ còn 4 km do sương mù khói, bạn ra đường nhớ đeo khẩu trang nhé!

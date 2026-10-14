@@ -2,7 +2,10 @@ from typing import Any
 import asyncio
 import httpx
 import os
+from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
+
+load_dotenv()  # đọc WEATHERAPI_KEY / PORT từ .env trong thư mục này
 
 # Initialize FastMCP server
 port = int(os.getenv("PORT", 8085))

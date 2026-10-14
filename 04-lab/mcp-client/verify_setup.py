@@ -1,48 +1,63 @@
 #!/usr/bin/env python3
 """
 Verification script for Weather Agent setup
-Checks if all components are configured correctly
+Checks if all components are configured correctly.
+
+LLM dùng OpenCode Go (model `step-5-preview-free`) qua ADK LiteLlm —
+KHÔNG cần GOOGLE_API_KEY / Gemini.
 """
 import os
 import sys
 from pathlib import Path
 
+
+def _env_path() -> Path:
+    """.env ở thư mục hiện tại, nếu không có thì cạnh script này."""
+    local = Path(".env")
+    if local.exists():
+        return local
+    return Path(__file__).resolve().parent / ".env"
+
+
 def check_environment():
     """Check if .env file exists and is configured"""
     print("🔍 Checking environment configuration...")
-    
-    env_file = Path(".env")
+
+    env_file = _env_path()
     if not env_file.exists():
         print("❌ .env file not found")
-        print("   Run: echo 'GOOGLE_API_KEY=your_key' > .env")
+        print("   Copy ../.env.example và điền OPENCODE_API_KEY")
         return False
-    
-    # Check if GOOGLE_API_KEY is set
+
+    # Check if OPENCODE_API_KEY is set
     from dotenv import load_dotenv
-    load_dotenv()
-    
-    api_key = os.getenv("GOOGLE_API_KEY")
-    if not api_key or api_key == "your_google_api_key_here":
-        print("❌ GOOGLE_API_KEY not configured in .env")
-        print("   Get key from: https://aistudio.google.com/apikey")
+    load_dotenv(env_file)
+
+    api_key = os.getenv("OPENCODE_API_KEY")
+    if not api_key or api_key.startswith("your_"):
+        print("❌ OPENCODE_API_KEY chưa được điền trong .env")
+        print("   Xem .env.example để biết biến cần điền")
         return False
-    
-    print(f"✅ GOOGLE_API_KEY configured ({api_key[:10]}...)")
+
+    # KHÔNG in bất kỳ phần nào của key
+    print("✅ OPENCODE_API_KEY đã được cấu hình")
     return True
+
 
 def check_dependencies():
     """Check if required packages are installed"""
     print("\n🔍 Checking dependencies...")
-    
+
     required_packages = [
         ("google.adk", "Google ADK"),
-        ("google.generativeai", "Google Generative AI"),
+        ("litellm", "LiteLLM (OpenCode Go provider)"),
+        ("openai", "openai"),
         ("mcp", "MCP"),
         ("fastmcp", "FastMCP"),
         ("dotenv", "python-dotenv"),
         ("httpx", "httpx"),
     ]
-    
+
     all_installed = True
     for package, name in required_packages:
         try:
@@ -51,22 +66,22 @@ def check_dependencies():
         except ImportError:
             print(f"❌ {name} not installed")
             all_installed = False
-    
+
     if not all_installed:
         print("\n   Install with: uv sync")
-        print("   Or: pip install google-adk google-generativeai mcp fastmcp python-dotenv httpx")
-    
+
     return all_installed
+
 
 def check_agent_structure():
     """Check if agent directory structure is correct"""
     print("\n🔍 Checking agent structure...")
-    
+
     required_files = [
         "weather_agent/agent.py",
         "weather_agent/__init__.py",
     ]
-    
+
     all_exist = True
     for file_path in required_files:
         path = Path(file_path)
@@ -75,8 +90,9 @@ def check_agent_structure():
         else:
             print(f"❌ {file_path} not found")
             all_exist = False
-    
+
     return all_exist
+
 
 def check_mcp_server():
     """Check if MCP server is accessible"""
@@ -84,7 +100,7 @@ def check_mcp_server():
 
     # Cùng URL mà weather_agent/agent.py dùng (biến môi trường MCP_SERVER_URL)
     from dotenv import load_dotenv
-    load_dotenv()
+    load_dotenv(_env_path())
     server_url = os.getenv("MCP_SERVER_URL", "http://localhost:8085/mcp")
 
     try:
@@ -104,15 +120,16 @@ def check_mcp_server():
         print("   Start it: cd ../mcp-server && uv run python weather.py")
         return False
 
+
 def check_agent_import():
     """Try to import the agent"""
     print("\n🔍 Checking agent import...")
-    
+
     try:
         # Suppress warnings during import
         import warnings
         warnings.filterwarnings("ignore")
-        
+
         from weather_agent import root_agent
         print(f"✅ Agent imported successfully: {root_agent.name}")
         print(f"   Model: {root_agent.model}")
@@ -121,13 +138,14 @@ def check_agent_import():
         print(f"❌ Failed to import agent: {e}")
         return False
 
+
 def main():
     """Run all verification checks"""
     print("=" * 60)
     print("Weather Agent Setup Verification")
     print("=" * 60)
     print()
-    
+
     checks = [
         check_environment(),
         check_dependencies(),
@@ -135,7 +153,7 @@ def main():
         check_mcp_server(),
         check_agent_import(),
     ]
-    
+
     print("\n" + "=" * 60)
     if all(checks):
         print("✅ All checks passed!")
@@ -148,6 +166,6 @@ def main():
         print("\n⚠️  Fix the issues above and run this script again")
         return 1
 
+
 if __name__ == "__main__":
     sys.exit(main())
-

@@ -1,0 +1,44 @@
+INFO:weather_agent.agent:🌐 Initializing weather agent with remote MCP server
+INFO:weather_agent.agent:📡 MCP Server: http://localhost:8085/mcp
+INFO:weather_agent.agent:🤖 Model: openai/step-5-preview-free via https://opencode.ai/zen/go/v1
+INFO:weather_agent.agent:🔌 Connecting to MCP server...
+INFO:weather_agent.agent:✅ MCP toolset created successfully
+INFO:weather_agent.agent:✅ Weather agent initialized with remote MCP tools:
+INFO:weather_agent.agent:   - get_current_weather(city)
+INFO:weather_agent.agent:   - get_forecast(city, days)
+INFO:weather_agent.agent:   - health_check()
+INFO:weather_agent.agent:🎉 Remote MCP connection successful!
+============================================================
+Weather Agent Setup Verification
+============================================================
+
+🔍 Checking environment configuration...
+✅ OPENCODE_API_KEY đã được cấu hình
+
+🔍 Checking dependencies...
+✅ Google ADK
+✅ LiteLLM (OpenCode Go provider)
+✅ openai
+✅ MCP
+✅ FastMCP
+✅ python-dotenv
+✅ httpx
+
+🔍 Checking agent structure...
+✅ weather_agent/agent.py
+✅ weather_agent/__init__.py
+
+🔍 Checking MCP server connectivity...
+✅ MCP server reachable at http://localhost:8085/mcp (HTTP 406)
+
+🔍 Checking agent import...
+✅ Agent imported successfully: weather_agent
+   Model: model='openai/step-5-preview-free' llm_client=<google.adk.models.lite_llm.LiteLLMClient object at 0x0000029F7E19C050>
+
+============================================================
+✅ All checks passed!
+
+🚀 Ready to start!
+   Run: uv run adk web
+
+📍 Then open: http://localhost:8000
